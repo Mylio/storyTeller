@@ -8,6 +8,8 @@
 <meta name="viewport" content="width = 1050, user-scalable = no" />
 <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/key.js"></script>
 </head>
 <body>
 
@@ -19,15 +21,12 @@
 			<div id="test"><h1>Hello</h1>
 			<form id="yrWord" style="z-index:200;">
 			  Write down your words: <input type="text" id="words" name="usrname"><br>
-			  Write down your words: <input type="text" id="wor2" name="111"><br>
-			  <input type="radio" name="sex" value="male" checked>Male
-			  <br>
-			  <input type="radio" name="sex" value="female">Female<br>
-			  Select your favorite color: <input type="color" name="favcolor"><br>
+			  Select your text color: <input type="color" id="textcolor" name="favcolor"><br>
 			  <input type="submit" value="Submit">
 			</form>
 			</div>
 			<div><span id="appendText"></span></div>
+			<div id="story"></div>
 			<div style="background-image:url(pages/3.jpg)"></div>
 			<div style="background-image:url(pages/4.jpg)"></div>
 			<div style="background-image:url(pages/5.jpg)"></div>
@@ -88,9 +87,42 @@ yepnope({
 <script type="text/javascript">
 			$(document).on('submit','#yrWord',function(e){
 				e.preventDefault();
-				alert("hi"+$("#words").val()+$("#wor2").val());
+				var textColor = $("#textcolor").val() ;
+				//alert("hi"+$("#words").val());
 				$("#appendText").append($("#words").val());
+				$("#appendText").append($("#textcolor").val());
+				$("#appendText").css("color",textColor);
+				//parse
+				var Story = Parse.Object.extend("testStory"); //新增表單的的意思
+           		var story = new Story();
+				story.save("text", $('#words').val());
+        		story.save("textColor",$('#textcolor').val());
+        		alert("done");
+
 			});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(e){
+		//e.preventDefault();
+        var data = Parse.Object.extend("testStory");//extend("資料表名稱")
+        var query = new Parse.Query(data);
+        var text ;
+        var color ;
+        query.find({
+          success: function(results) {
+            for (var i = 0; i < results.length; i++) { 
+              var object = results[i];
+              text = object.get('text');
+              color =  object.get('textColor');
+              $("#story").append("<span style='color:" +color + ";'>" + text + "</span>");
+            }
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+        /*end query*/
+    });
 </script>
 
 </body>
