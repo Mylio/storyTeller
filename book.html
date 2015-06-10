@@ -97,6 +97,7 @@ yepnope({
            		var story = new Story();
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
+        		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		alert("done");
 
 			});
