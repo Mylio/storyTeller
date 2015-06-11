@@ -20,7 +20,7 @@
 			<div style="background-image:url(pages/2.jpg)"></div>
 			<div id="test"><h1>Hello</h1>
 			<form id="yrWord" style="z-index:200;">
-			  Write down your words: <input type="text" id="words" name="usrname"><br>
+			  Write down your words: <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br>
 			  Select your text color: <input type="color" id="textcolor" name="favcolor"><br>
 			  <input type="submit" value="Submit">
 			</form>
