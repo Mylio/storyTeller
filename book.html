@@ -111,7 +111,11 @@ yepnope({
         var color ;
         query.find({
           success: function(results) {
+
             for (var i = 0; i < results.length; i++) { 
+              if(i==0){
+              	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+              }
               var object = results[i];
               text = object.get('text');
               color =  object.get('textColor');
