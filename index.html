@@ -2,6 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <title>Story Teller</title>
     <style type="text/css">
 
@@ -23,6 +27,37 @@
 	<a href="desk.html"><img class="desk" src="img/icon_desk.png" width="20%" height="20%"/></a>
 	<a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf.png" width="20%" height="20%"/></a>
 	<a href="#"><img class="home" src="img/icon_home.png" width="20%" height="20%"/></a>
+
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">How it works</button>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title">當一個作者  該怎麼做呢？ </h2>
+        </div>
+        <div class="modal-body">
+          <p>
+          <strong>首先，點選書桌，並選一個開頭：</strong><br>
+          我們提供數個故事的開頭，每個都充滿想像力，請挑選一個吸引你的。你可以選擇當第一個接著說故事的人，也可以選擇<strong>接續一個未完成的故事</strong>。
+          </p>
+          <p>
+            <strong>故事接龍</strong><br>
+            接龍是我們的核心概念。藉由多人多樣的聯想力、創作力，到底會誕生什麼模樣的故事呢？</p>
+            <h4>當一個讀者</h4>
+          <p>在書櫃上選一個你喜歡的開頭，你會看到不同群人創造出不同版本的故事。無論是細細閱讀其中一本，或是縱橫比較故事之間的差異，都能消磨你一個慵懶的下午。</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 </body>
