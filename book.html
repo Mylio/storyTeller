@@ -10,6 +10,20 @@
 <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/key.js"></script>
+<style>
+	.icon {
+    width: 0px;
+    height: 170px;
+    background: black;
+    
+    transition: width 0.7s;
+    -webkit-transition: width 0.7s; /* Safari 3.1 to 6.0 */
+    }
+
+    .icon:hover {
+        width: 170px;
+    }
+</style>
 </head>
 <body>
 
@@ -41,6 +55,8 @@
 		</div>
 	</div>
 </div>
+<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.5;">
+  <div style="position:fixed;bottom:-10px;left:-20px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png"/></a></div></div><span style="color:white;position:fixed;bottom:20px;left:5px;">Back to Bookshelf</span>
 
 
 <script type="text/javascript">
