@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="flipbook">
 			<div style="background-image:url(img/book3.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%" id="test"><h1>Hello</h1>
 			<form id="yrWord" style="z-index:200;">
 			  Write down your words: <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br>
@@ -40,7 +40,7 @@
 			</form>
 			</div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
-			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
@@ -115,6 +115,7 @@ yepnope({
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
         		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        		$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		alert("done");
 
 			});
@@ -132,11 +133,14 @@ yepnope({
             for (var i = 0; i < results.length; i++) { 
               if(i==0){
               	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+              	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
               }
+
               var object = results[i];
               text = object.get('text');
               color =  object.get('textColor');
               $("#story").append("<span style='color:" +color + ";'>" + text + "</span>");
+              $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
             }
           },
           error: function(error) {
@@ -146,6 +150,5 @@ yepnope({
         /*end query*/
     });
 </script>
-
 </body>
 </html>
