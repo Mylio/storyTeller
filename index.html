@@ -13,14 +13,16 @@
     body {
     background: url("img/page_home_2500.png");
     background-size:cover;
-    /*background-repeat: no-repeat;*/
+    background-repeat: no-repeat;
 	}
 
 	img.desk:hover, img.desk:active{width: 30% ; height: 30%;}
 	img.bookshelf:hover, img.bookshelf:active{width: 30% ; height: 30%;}
 	img.home:hover, img.home:active{transform-origin: 50% 50%;width: 30% ; height: 30%;}
   .big{width: 30% ; height: 30%;}
+  #howwork{position: absolute;top: 55%;right: 45%;}
     </style>
+  
 
 
 </head>
@@ -29,10 +31,9 @@
 <div id="content">
 	<a href="desk.html"><img class="desk" src="img/icon_desk.png" width="20%" height="20%"/></a>
 	<a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf.png" width="20%" height="20%"/></a>
-<<<<<<< Updated upstream
 	<a href="#"><img class="home" src="img/icon_home.png" width="20%" height="20%"/></a>
 
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">How it works</button>
+  <button id="howwork" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">How it works</button>
 
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -62,9 +63,7 @@
 
     </div>
   </div>
-=======
-	<div id="home"><a href="#"><img class="home" src="img/icon_home.png" width="20%" height="20%"/></a></div>
->>>>>>> Stashed changes
+
 </div>
 <script>
  // $("img").hover(function (e) {
