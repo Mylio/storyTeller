@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Story Teller</title>
+    <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+    <link href="css/ihover.css" rel="stylesheet">
     <style type="text/css">
 
     body {
@@ -14,6 +16,10 @@
     img.book1:hover, img.book1:active{width: 30% ; height: 30%; }
     img.book2:hover, img.book2:active{width: 30% ; height: 30%; }
     img.book3:hover, img.book3:active{width: 30% ; height: 30%; }
+    /*.hide{visibility: hidden;z-index: 1 ;}*/
+    .ih-item.square{
+      float: left ;
+    }
 
     </style>
 
@@ -21,11 +27,71 @@
 <body>
 
   <div class="content">
-    <a href="book.html"><img class="book1" src="img/book1.png" width="20%" height="20%" /></a>
+<!--     <a href="book.html"><img class="book1" src="img/book1.png" width="20%" height="20%" />
+    
+    </a>
     <a href="book2.html"><img class="book2" src="img/book2.png" width="20%" height="20%"/></a>
     <a href="book3.html"><img class="book3" src="img/book3.png" width="20%" height="20%"/></a>
   </div>
+  <div style="z-index:100">
+  <img id="book1" class="hide" src="img/book1.png" width="30%" height="30%" />
+  </div> -->
 
+  <div class="row" style="margin:0 auto;width:80%;">
+  <div class="col-sm-4">
+ 
+    <!-- normal -->
+    <div class="ih-item square effect9 right_to_left"><a href="book.html">
+        <div class="img"><img src="img/book1.png" alt="img"></div>
+        <div class="info">
+          <div class="info-back">
+            <h3>Heading here</h3>
+            <p>Description goes here</p>
+          </div>
+        </div></a></div>
+    <!-- end normal -->
+
+ 
+  </div>
+  <div class="col-sm-4">
+    <!-- colored -->
+    <div class="ih-item square colored effect9 right_to_left"><a href="book2.html">
+        <div class="img"><img src="img/book2.png" alt="img"></div>
+        <div class="info">
+          <div class="info-back">
+            <h3>Heading here</h3>
+            <p>Description goes here</p>
+          </div>
+        </div></a></div>
+    <!-- end colored-->
+ 
+  </div>
+    <div class="col-sm-4">
+    <!-- ww -->
+    <div class="ih-item square effect9 right_to_left"><a href="book3.html">
+        <div class="img"><img src="img/book3.png" alt="img"></div>
+        <div class="info">
+          <div class="info-back">
+            <h3>Heading here</h3>
+            <p>Description goes here</p>
+          </div>
+        </div></a></div>
+    <!-- ww -->
+ 
+  </div>
+</div>
+</div>
+<script>
+ // $("img").hover(function (e) {
+ //   var bookname = $(this).attr('class') ;
+ //   $("#"+bookname).removeClass('hide') ;
+ //  },
+ //  function (e) {
+ //    var bookname = $(this).attr('class') ;
+ //   $("#"+bookname).addClass('hide') ;
+ //  }
+ //  );
+</script>
 </body>
 
 </html>
