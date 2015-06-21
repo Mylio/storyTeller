@@ -20,6 +20,18 @@
     .ih-item.square{
       float: left ;
     }
+    .icon {
+    width: 0px;
+    height: 100px;
+    background: black;
+    opacity: 0.5 ;
+    transition: width 2s;
+    -webkit-transition: width 2s; /* Safari 3.1 to 6.0 */
+    }
+
+    .icon:hover {
+        width: 300px;
+    }
 
     </style>
 
@@ -81,9 +93,10 @@
  
   </div>
 </div>
-  <div style="position:fixed;bottom:20px;left:10px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf.png"/></a></div>
-
-  <div style="position:fixed;bottom:20px;right:10px;"><a href="index.html"><img class="home" src="img/icon_home.png"/></a></div>
+<div class="icon">
+  <div style="position:fixed;bottom:-10px;left:-20px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png"/></a></div></div>
+<div class="icon">
+  <div style="position:fixed;bottom:-15px;right:-20px;"><a href="index.html"><img class="home" src="img/icon_home_clean.png"/></a></div></div>
 
 </div>
 <script>
