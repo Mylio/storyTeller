@@ -7,18 +7,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <title>Story Teller</title>
+  <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
     <style type="text/css">
 
     body {
-    background: url("img/home.png");
+    background: url("img/page_home_2500.png");
     background-size:cover;
     /*background-repeat: no-repeat;*/
 	}
 
 	img.desk:hover, img.desk:active{width: 30% ; height: 30%;}
 	img.bookshelf:hover, img.bookshelf:active{width: 30% ; height: 30%;}
-	img.home:hover, img.home:active{width: 30% ; height: 30%;}
+	img.home:hover, img.home:active{transform-origin: 50% 50%;width: 30% ; height: 30%;}
+  .big{width: 30% ; height: 30%;}
     </style>
+
 
 </head>
 <body>
@@ -26,6 +29,7 @@
 <div id="content">
 	<a href="desk.html"><img class="desk" src="img/icon_desk.png" width="20%" height="20%"/></a>
 	<a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf.png" width="20%" height="20%"/></a>
+<<<<<<< Updated upstream
 	<a href="#"><img class="home" src="img/icon_home.png" width="20%" height="20%"/></a>
 
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">How it works</button>
@@ -58,8 +62,16 @@
 
     </div>
   </div>
+=======
+	<div id="home"><a href="#"><img class="home" src="img/icon_home.png" width="20%" height="20%"/></a></div>
+>>>>>>> Stashed changes
 </div>
-
+<script>
+ // $("img").hover(function (e) {
+ //    $("#home").empty();
+ //    $("#home").append("<img id='big' src='img/icon_home.png' width='30%' height='30%'/>");
+ //  });
+</script>
 </body>
 
 </html>
