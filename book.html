@@ -5,6 +5,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+<meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
 <meta name="viewport" content="width = 1050, user-scalable = no" />
 <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
@@ -32,15 +33,17 @@
 		<div class="flipbook">
 			<div style="background-image:url(img/book1.png);background-size:100%;"></div>
 			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%" id="test"><h1>Hello</h1>
+			<div style="background-image:url(img/paper.png);background-size:100%" id="test">
+			<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>
+			<h1>Hello</h1>
 			<form id="yrWord" style="z-index:200;">
 			  Write down your words: <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br>
 			  Select your text color: <input type="color" id="textcolor" name="favcolor"><br>
 			  <input type="submit" value="Submit">
 			</form>
 			</div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
-			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div>
+<!-- 			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
+			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div> -->
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
@@ -100,9 +103,12 @@ yepnope({
 });
 
 </script>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript" charset="utf-8" >
 			$(document).on('submit','#yrWord',function(e){
 				e.preventDefault();
+				if($("#words").val()==''){
+					alert('嘿，你什麼也沒寫！寫點什麼加入我們吧！');
+				}else{
 				var textColor = $("#textcolor").val() ;
 				//alert("hi"+$("#words").val());
 				$("#appendText").append($("#words").val());
@@ -114,9 +120,10 @@ yepnope({
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
         		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
-        		$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		$("#words").val('');
-        		alert("done");
+        		alert("您剛剛的接龍已經發佈啦！");
+        		}
 
 			});
 </script>
@@ -133,14 +140,14 @@ yepnope({
             for (var i = 0; i < results.length; i++) { 
               if(i==0){
               	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
-              	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+           //   	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
               }
 
               var object = results[i];
               text = object.get('text');
               color =  object.get('textColor');
               $("#story").append("<span style='color:" +color + ";'>" + text + "</span>");
-              $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
+           //   $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
             }
           },
           error: function(error) {
