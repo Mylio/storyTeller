@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
 <meta name="viewport" content="width = 1050, user-scalable = no" />
 <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/key.js"></script>
@@ -24,6 +25,16 @@
     .icon:hover {
         width: 170px;
     }
+    .btn-circle {
+	  width: 60px;
+	  height: 60px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 14px;
+	  line-height: 1.42;
+	  border-radius: 30px;
+	  background-color: rgb(129, 190 , 220);
+	}
 </style>
 </head>
 <body>
@@ -35,11 +46,14 @@
 			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%" id="test">
 			<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>
-			<h1>Hello</h1>
+			<h1>接下來的故事會怎麼發展呢？</h1>
 			<form id="yrWord" style="z-index:200;">
-			  Write down your words: <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br>
-			  Select your text color: <input type="color" id="textcolor" name="favcolor"><br>
-			  <input type="submit" value="Submit">
+			  1. 選擇喜歡的顏色: <input type="color" id="textcolor" name="favcolor"><br>
+			  2. 繼續接下去吧！ <br><textarea rows="7" cols="50" id="words"></textarea><br><br>
+			  <!-- <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br> -->
+			  
+			  <!-- <input type="submit" value="送出！"> -->
+			  <button type="submit" class="btn btn-info btn-circle" style="right:100px;position:absolute;">送出！</button>
 			</form>
 			</div>
 <!-- 			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
