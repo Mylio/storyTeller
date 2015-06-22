@@ -119,7 +119,7 @@ yepnope({
            		var story = new Story();
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
-        		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        		$("#story").append("<p><span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span></p>");
         	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		$("#words").val('');
         		alert("您剛剛的接龍已經發佈啦！");
@@ -146,7 +146,7 @@ yepnope({
               var object = results[i];
               text = object.get('text');
               color =  object.get('textColor');
-              $("#story").append("<span style='color:" +color + ";'>" + text + "</span>");
+              $("#story").append("<span style='color:" +color + ";'>" + text + "</span><br>");
            //   $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
             }
           },
