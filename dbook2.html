@@ -1,0 +1,156 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta name="viewport" content="width = 1050, user-scalable = no" />
+<script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/key.js"></script>
+<style>
+	.icon {
+    width: 0px;
+    height: 170px;
+    background: black;
+    
+    transition: width 0.7s;
+    -webkit-transition: width 0.7s; /* Safari 3.1 to 6.0 */
+    }
+
+    .icon:hover {
+        width: 170px;
+    }
+</style>
+</head>
+<body>
+
+<div class="flipbook-viewport">
+	<div class="container">
+		<div class="flipbook">
+			<div style="background-image:url(img/book2.png);background-size:100%;"></div>
+			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%" id="test"><h1>Hello</h1>
+			<form id="yrWord" style="z-index:200;">
+			  Write down your words: <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br>
+			  Select your text color: <input type="color" id="textcolor" name="favcolor"><br>
+			  <input type="submit" value="Submit">
+			</form>
+			</div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
+			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
+		</div>
+	</div>
+</div>
+<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.5;">
+  <div style="position:fixed;bottom:-10px;left:-20px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png"/></a></div></div><span style="color:white;position:fixed;bottom:20px;left:5px;">Back to Bookshelf</span>
+
+
+
+<script type="text/javascript">
+
+function loadApp() {
+
+	// Create the flipbook
+
+	$('.flipbook').turn({
+			// Width
+
+			width:922,
+			
+			// Height
+
+			height:600,
+
+			// Elevation
+
+			elevation: 50,
+			
+			// Enable gradients
+
+			gradients: true,
+			
+			// Auto center this flipbook
+
+			autoCenter: true
+
+	});
+}
+
+// Load the HTML4 version if there's not CSS transform
+
+yepnope({
+	test : Modernizr.csstransforms,
+	yep: ['lib/turn.js'],
+	nope: ['lib/turn.html4.min.js'],
+	both: ['css/basic.css'],
+	complete: loadApp
+});
+
+</script>
+<script type="text/javascript">
+			$(document).on('submit','#yrWord',function(e){
+				e.preventDefault();
+				var textColor = $("#textcolor").val() ;
+				//alert("hi"+$("#words").val());
+				$("#appendText").append($("#words").val());
+				$("#appendText").append($("#textcolor").val());
+				$("#appendText").css("color",textColor);
+				//parse
+				var Story = Parse.Object.extend("Story2"); //新增表單的的意思
+           		var story = new Story();
+				story.save("text", $('#words').val());
+        		story.save("textColor",$('#textcolor').val());
+        		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        		$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        		$("#words").val('');
+        		alert("done");
+
+			});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(e){
+		//e.preventDefault();
+        var data = Parse.Object.extend("Story2");//extend("資料表名稱")
+        var query = new Parse.Query(data);
+        var text ;
+        var color ;
+        query.find({
+          success: function(results) {
+
+            for (var i = 0; i < results.length; i++) { 
+              if(i==0){
+              	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+              	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+              }
+
+              var object = results[i];
+              text = object.get('text');
+              color =  object.get('textColor');
+              $("#story").append("<span style='color:" +color + ";'>" + text + "</span>");
+              $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
+            }
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+        /*end query*/
+    });
+</script>
+
+</body>
+</html>

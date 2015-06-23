@@ -1,0 +1,259 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
+<meta name="viewport" content="width = 1050, user-scalable = no" />
+<script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/key.js"></script>
+<style>
+	.icon {
+    width: 0px;
+    height: 180px;
+    background: white;
+    
+    transition: width 0.7s;
+    -webkit-transition: width 0.7s; /* Safari 3.1 to 6.0 */
+    }
+
+    .icon:hover {
+        width: 170px;
+    }
+    .btn-circle {
+	  width: 60px;
+	  height: 60px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 14px;
+	  line-height: 1.42;
+	  border-radius: 30px;
+	  background-color: rgb(129, 190 , 220);
+	}
+</style>
+</head>
+<body>
+<div class="content">
+
+<div class="flipbook-viewport">
+	<div class="container">
+		<div class="flipbook">
+			<div style="background-image:url(img/book1.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"><div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p1"></span></div>
+
+<!-- 			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
+			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div> -->
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p2"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p3"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p4"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p5"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
+		</div>
+	</div>
+</div><!--/flip book-->
+
+
+<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.8;">
+  <div style="position:fixed;bottom:-20px;left:-30px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png" width="170px" height="170px" /></a></div></div>
+</div>
+
+<script type="text/javascript">
+
+function loadApp() {
+
+	// Create the flipbook
+
+	$('.flipbook').turn({
+			// Width
+
+			width:922,
+			
+			// Height
+
+			height:600,
+
+			// Elevation
+
+			elevation: 50,
+			
+			// Enable gradients
+
+			gradients: true,
+			
+			// Auto center this flipbook
+
+			autoCenter: true
+
+	});
+}
+
+// Load the HTML4 version if there's not CSS transform
+
+yepnope({
+	test : Modernizr.csstransforms,
+	yep: ['lib/turn.js'],
+	nope: ['lib/turn.html4.min.js'],
+	both: ['css/basic.css'],
+	complete: loadApp
+});
+
+</script>
+<script type="text/javascript" language="javascript" charset="utf-8">
+	 var current ;
+	 var totalH ;
+	 var resultL ;
+	$(document).ready(function(e){
+		//e.preventDefault();
+        var data = Parse.Object.extend("testStory");//extend("資料表名稱")
+        var query = new Parse.Query(data);
+        var text ;
+        var color ;
+        var pgNu ;
+        
+        current = 1 ;
+        query.find({
+          success: function(results) {
+            resultL = results.length ;
+            console.log(resultL) ;
+
+            for (var i = 0; i < results.length; i++) { 
+              if(i==0){
+            //  	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+           //   	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+              }
+
+              var object = results[i];
+              text = object.get('text');
+              color =  object.get('textColor');
+              pgNu = object.get('pageNum');
+              current = pgNu ;
+              console.log(current);
+              hei= object.get('textHei');
+              totalH += hei ;
+              console.log("totalH"+totalH);
+              $("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span><br>");
+              if(totalH > 500 ){
+              	current ++ ;
+              	totalH -= 500 ;
+              	console.log(" totalH "+totalH+" cur"+current);
+
+              }
+              // console.log($("#p"+current).height(true)); //0
+              // console.log( $('#span'+(i+1)).height(true));//0
+              // console.log($('#span'+(i+1)));
+          //     if($("#p"+current).height() > 300 ){
+        		// 	current ++ ;
+        		// 	console.log(current);
+        		// 	return current ;
+        		// }
+        		// console.log(current); //1
+        		// console.log($('#span'+(i+1)).height());
+            }
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+        /*end query*/
+
+      //  console.log($("#story").outerHeight(true));
+       // console.log("height"+$("#story").height());
+    });
+		// function nextPage(){
+		// 	var data = Parse.Object.extend("testStory");//extend("資料表名稱")
+  //       	var query = new Parse.Query(data);
+  //       	query.find({
+  //         		success: function(results) {
+  //         			resultL = results.length ;
+  //         			return resultL ;
+  //         		}
+  //         	})
+		// 	if($("#p"+current).height() !== 0){
+		// 		for(var i=0 ; i< resultL ; i++){
+		// 		 totalH += $('#span'+(i+1)).height() ;
+		// 		 if(totalH > 400 ){
+		// 		 	console.log("totalH > 400!");
+		// 		 }
+		// 		}
+		// 	}
+		// }
+			$(document).on('click','#start',function(e){
+				$("#test").css("display","block");
+			});
+
+			//var sub = false ;
+			$(document).on('submit','#yrWord',function(e){
+				e.preventDefault();
+				sub = true ;
+				if($("#words").val()==''){
+					alert('嘿，你什麼也沒寫！寫點什麼加入我們吧！');
+				}else{
+				var textColor = $("#textcolor").val() ;
+				//alert("hi"+$("#words").val());
+				$("#appendText").append($("#words").val());
+				$("#appendText").append($("#textcolor").val());
+				$("#appendText").css("color",textColor);
+				//parse
+				var Story = Parse.Object.extend("testStory"); //新增表單的的意思
+           		var story = new Story();
+				story.save("text", $('#words').val());
+        		story.save("textColor",$('#textcolor').val());
+        		story.save("textHei", 21 * Math.ceil($('#words').length / 418) );
+        		console.log(current);
+
+        		if($("#p"+current).height() > 500 ){
+        			alert($("#p"+current).height());
+        			console.log($("#p"+current).height());
+        			current ++ ;
+        			console.log(current);
+        			return current ;
+        		}
+        		story.save("pageNum",current);
+        		$("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
+        	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        		$("#words").val('');
+        		alert("您剛剛的接龍已經發佈啦！");
+        		console.log($("#p"+current).height());//height判斷的是螢幕上有的，得另外存值，要不然會跑0。
+        		console.log(current);
+        		
+        		}
+
+
+			});
+			// if(sub){
+			// 	console.log($("#p"+current).height());
+			// 	sub = false ;
+
+			// }
+
+</script>
+
+</body>
+</html>
