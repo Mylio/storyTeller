@@ -46,15 +46,21 @@
 
 <div style="align:center;width:100%;height:300px;background-image:url(img/paper.png);background-size:cover;bottom:-380px;position:absolute;" id="test">
 
-				<h1 style="padding-left:20px;">接下來的故事會怎麼發展呢？</h1>
-				<form id="yrWord" style="z-index:200;padding-left:20px;">
+				<h1 style="margin-left:40%;">接下來的故事會怎麼發展呢？</h1>
+				<form id="yrWord" style="z-index:200;margin-left:40%;">
 				  1. 選擇喜歡的顏色: <input type="color" id="textcolor" name="favcolor"><br>
 				  2. 繼續接下去吧！ <br><textarea rows="7" cols="50" id="words"></textarea><br><br>
 				  <!-- <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br> -->
 				  
 				  <!-- <input type="submit" value="送出！"> -->
+				
+            		<input type="file" id="fileInput">
+
 				  <button type="submit" class="btn btn-info btn-circle" style="bottom:100px;position:absolute;right:60%;">送出！</button>
+
 				</form>
+
+				
 </div>
 <!--/form-->
 
@@ -152,6 +158,8 @@ yepnope({
         var text ;
         var color ;
         var pgNu ;
+        var img;
+        query.exists("img");
         
         current = 1 ;
         query.find({
@@ -169,12 +177,14 @@ yepnope({
               text = object.get('text');
               color =  object.get('textColor');
               pgNu = object.get('pageNum');
+              img = object.get('img');
+
               current = pgNu ;
               console.log(current);
               hei= object.get('textHei');
               totalH += hei ;
               console.log("totalH"+totalH);
-              $("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span><br>");
+              $("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span>" + "<img src='" + img.url() + "' width='100px' height='100px'> <br>");
               if(totalH > 500 ){
               	current ++ ;
               	totalH -= 500 ;
@@ -253,6 +263,21 @@ yepnope({
         		}
         		story.save("pageNum",current);
         		$("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
+
+        		if ($("#fileInput")[0].files.length > 0) {
+		         var file = $("#fileInput")[0].files[0];
+		         var name = "photo";
+		         var parseImg = new Parse.File(name, file);
+		         story.save("img",parseImg);
+		         parseImg.save({
+		         success : function (savedImg){
+		         alert(savedImg.url());
+		         },
+		         error : function (saveingImg , errorObject){
+		         alert(errorObject.message) ;
+		         }
+		         });
+		        }
         	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		$("#words").val('');
         		alert("您剛剛的接龍已經發佈啦！");
