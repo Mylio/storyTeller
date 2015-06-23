@@ -5,6 +5,7 @@
   <title>Story Teller</title>
     <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
     <link href="css/ihover.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style type="text/css">
 
     body {
@@ -48,11 +49,25 @@
         width: 170px;
     }
 
+    .loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+    }
     </style>
+    <script type="text/javascript">
+    $(window).load(function() {
+      $(".loader").fadeOut("slow");
+    })
+    </script>
 
 </head>
 <body>
-
+  <div class="loader"></div>
   <div class="content">
 <!--     <a href="book.html"><img class="book1" src="img/book1.png" width="20%" height="20%" />
     
