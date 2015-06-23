@@ -43,27 +43,41 @@
 	<div class="container">
 		<div class="flipbook">
 			<div style="background-image:url(img/book1.png);background-size:100%;"></div>
-			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;"><div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p1"></span></div>
 			<div style="background-image:url(img/paper.png);background-size:100%" id="test">
-			<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>
-			<h1>接下來的故事會怎麼發展呢？</h1>
-			<form id="yrWord" style="z-index:200;">
-			  1. 選擇喜歡的顏色: <input type="color" id="textcolor" name="favcolor"><br>
-			  2. 繼續接下去吧！ <br><textarea rows="7" cols="50" id="words"></textarea><br><br>
-			  <!-- <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br> -->
-			  
-			  <!-- <input type="submit" value="送出！"> -->
-			  <button type="submit" class="btn btn-info btn-circle" style="right:100px;position:absolute;">送出！</button>
-			</form>
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>
+				<h1>接下來的故事會怎麼發展呢？</h1>
+				<form id="yrWord" style="z-index:200;">
+				  1. 選擇喜歡的顏色: <input type="color" id="textcolor" name="favcolor"><br>
+				  2. 繼續接下去吧！ <br><textarea rows="7" cols="50" id="words"></textarea><br><br>
+				  <!-- <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br> -->
+				  
+				  <!-- <input type="submit" value="送出！"> -->
+				  <button type="submit" class="btn btn-info btn-circle" style="right:100px;position:absolute;">送出！</button>
+				</form>
 			</div>
 <!-- 			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
 			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div> -->
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p2"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p3"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p4"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p5"></span>
+			</div>
+
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
@@ -117,7 +131,44 @@ yepnope({
 });
 
 </script>
-<script type="text/javascript" language="javascript" charset="utf-8" >
+<script type="text/javascript" language="javascript" charset="utf-8">
+	 var current ;
+	$(document).ready(function(e){
+		//e.preventDefault();
+        var data = Parse.Object.extend("testStory");//extend("資料表名稱")
+        var query = new Parse.Query(data);
+        var text ;
+        var color ;
+        current = 1 ;
+        query.find({
+          success: function(results) {
+
+            for (var i = 0; i < results.length; i++) { 
+              if(i==0){
+            //  	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+           //   	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
+              }
+
+              var object = results[i];
+              text = object.get('text');
+              color =  object.get('textColor');
+              $("#p"+current).append("<span style='color:" +color + ";'>" + text + "</span><br>");
+              if($("#p"+current).height() > 300 ){
+        			current ++ ;
+        			console.log(current);
+        		}
+            }
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+        /*end query*/
+
+      //  console.log($("#story").outerHeight(true));
+       // console.log("height"+$("#story").height());
+    });
+
 			$(document).on('submit','#yrWord',function(e){
 				e.preventDefault();
 				if($("#words").val()==''){
@@ -133,43 +184,19 @@ yepnope({
            		var story = new Story();
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
-        		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
+        		if($("#p"+current).height() > 300 ){
+        			current ++ ;
+        			console.log(current);
+        		}
+        		$("#p"+current).append("<span id='instant' style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
         	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		$("#words").val('');
         		alert("您剛剛的接龍已經發佈啦！");
+        		console.log($("#p"+current).height());
+        		
         		}
 
 			});
-</script>
-<script type="text/javascript">
-	$(document).ready(function(e){
-		//e.preventDefault();
-        var data = Parse.Object.extend("testStory");//extend("資料表名稱")
-        var query = new Parse.Query(data);
-        var text ;
-        var color ;
-        query.find({
-          success: function(results) {
-
-            for (var i = 0; i < results.length; i++) { 
-              if(i==0){
-              	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
-           //   	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
-              }
-
-              var object = results[i];
-              text = object.get('text');
-              color =  object.get('textColor');
-              $("#story").append("<span style='color:" +color + ";'>" + text + "</span><br>");
-           //   $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
-            }
-          },
-          error: function(error) {
-            alert("Error: " + error.code + " " + error.message);
-          }
-        });
-        /*end query*/
-    });
 </script>
 
 </body>
