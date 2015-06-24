@@ -343,6 +343,7 @@ yepnope({
 		         var file = $("#fileInput")[0].files[0];
 		         var name = "photo";
 		         var parseImg = new Parse.File(name, file);
+		         $("#p"+parseImg).append("<img src='" + parseIng.url() + "' width='100px' height='100px'> <br>");
 		         story.save("img",parseImg);
 		         parseImg.save({
 		         success : function (savedImg){
