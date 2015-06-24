@@ -158,23 +158,29 @@ yepnope({
 		//e.preventDefault();
         var data = Parse.Object.extend("testStory");//extend("資料表名稱")
         var query = new Parse.Query(data);
+
+
         var text ;
         var color ;
         var pgNu ;
         var img;
-        query.exists("img");
+        
         
         query.ascending("createdAt");
         query.find({
           success: function(results) {
+          	console.log(results);
             resultL = results.length ;
-            //console.log(resultL) ;
+            console.log(resultL) ;
 
             for (var i = 0; i < results.length; i++) { 
               if(i==0){
+
             //  	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
            //   	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
               }
+
+              
 
               var object = results[i];
               text = object.get('text');
@@ -183,6 +189,8 @@ yepnope({
               img = object.get('img');
               end = object.get('end');/***/
               
+              
+              console.log(img);
               console.log(current);
               hei= object.get('textHei');
               totalH += hei ;
@@ -196,8 +204,15 @@ yepnope({
               	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
               	$("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
 
-              }else{
+              }
+              else if (img != null)
+              {
+              	query.exists("img");
               	$("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span>" + "<img src='" + img.url() + "' width='100px' height='100px'> <br>");
+              }
+              else{
+
+              	$("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span> <br>");
               }
               
               if(totalH > 500 ){
@@ -318,7 +333,12 @@ yepnope({
 		         alert(errorObject.message) ;
 		         }
 		         });
+		         
+		        // $("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
 		        }
+
+		        
+
         	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		$("#words").val('');
         		alert("您剛剛的接龍已經發佈啦！");
