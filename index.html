@@ -10,7 +10,6 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <style type="text/css">
-
     body {
     background: url("img/page_home_2500_small.png");
     background-position-x:center;
@@ -18,7 +17,7 @@
     background-repeat: no-repeat;
     background-size:auto 870px;
     background-color: black ;
-	}
+  }
   .modal-content{
     font-family:微軟正黑體;
   }
@@ -29,33 +28,70 @@
     font-size:2em; 
     font-weight: bold;
   }
-	img.desk:hover, img.desk:active{width: 17% ; height: 17%;}
+  #content1{
+    position:relative;
+    float:left;
+    top:0px;
+    left:0px;
+    width:50%;
+    height:600px;
+  }
+  #content2{
+    position:relative;
+    float:right;
+    top:0px;
+    right:0px;
+    width:50%;
+    height:600px;
+  }
+  img.desk:hover, img.desk:active{width: 17% ; height: 17%;}
   img.desk {
-    margin-top:13%;
-    margin-left:24%;
-    width:15%;
-    height:15%;
+/*    margin-top:145px;
+    margin-right:470px;
+    margin-bottom:230px;
+    margin-left:200px;
+    height:200px;
+    z-index: 0;*/
+    position:absolute;
+    top:100px;
+    right:80px;
   }
   img.home{
-    margin-bottom: 5%;
-    margin-right:5%;
-    width:15%;
-    height:15%;
+/*    margin-top: 50px;
+    margin-bottom: 200px;
+    margin-right:100px;
+    margin-left: 250px;    
+    
+    z-index: 1;*/
+    position:absolute;
+    top:30px;
+    right:0;
+    height:200px;
   }
   img.bookshelf{
-    margin-top:9%;
-    margin-right:16%;
-    width:15%;
-    height:15%;
+/*    margin-top:150px;
+    margin-bottom: 500px;
+    margin-left:740px;
+    margin-right:250px;
+    height:200px;
+    z-index: 2;*/
+    position:absolute;
+    top:13px;
+    left:48px;
+    height:200px;
   }
-  #btn1{
-    margin-top: 10%;
-    margin-left: 10%;
+  .btn{
+/*    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 100px;
+    z-index: 3;*/
+    position: absolute;
+    top:285px;
+    left:173px;
   }
-	img.bookshelf:hover, img.bookshelf:active{width: 17% ; height: 17%;}
+  img.bookshelf:hover, img.bookshelf:active{width: 17% ; height: 17%;}
   /*img.home:hover, img.home:active{transform-origin: 50% 50%;width: 30% ; height: 30%;}*/
-
-	.loader {
+  .loader {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -77,12 +113,16 @@
 
 <div class="loader"></div>
 
-<div id="content">
-	<a href="desk.html"><img class="desk" src="img/icon_desk.png" /></a>
-	<a href="#"><img class="home" src="img/icon_home.png" /></a>
+<div id="content1">
+  <a href="desk.html"><img class="desk" src="img/icon_desk.png" /></a>
+  <a href="#"><img class="home" src="img/icon_home.png" /></a>
+  </div>
+  <div id="content2">
   <a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf.png"/></a>
-  <div calss="btn">
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">How it works</button>
+  
+  <div class="btn">
+    <button type="button" class="btn btn-info btn-lg" id="how" data-toggle="modal" data-target="#myModal">How it works</button>
+  </div>
   </div>
   
 
@@ -130,7 +170,6 @@
   </div>
 </div>
 <script>
-
 </script>
 
 </body>
