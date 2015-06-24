@@ -50,7 +50,7 @@
 				<form id="yrWord" style="z-index:200;margin-left:30%;">
 				  1. 選擇喜歡的顏色: <input type="color" id="textcolor" name="favcolor"><br>
 				  2. 繼續接下去吧！ <br><textarea rows="7" cols="50" id="words"></textarea><br><br>				
-            		<input type="file" id="fileInput">
+            		<!-- <input type="file" id="fileInput"> -->
 				  <button type="submit" class="btn btn-info btn-circle" style="bottom:10px;position:absolute;right:40%;">送出！</button>
 
 				</form>
@@ -153,8 +153,7 @@ yepnope({
         var color ;
         var pgNu ;
         var img;
-        query.exists("img");
-        
+      //  query.exists("img");
         
         query.find({
           success: function(results) {
@@ -172,7 +171,7 @@ yepnope({
               hei= object.get('textHei');
               totalH += hei ;
               console.log("totalH"+totalH);
-              $("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span>" + "<img src='" + img.url() + "' width='100px' height='100px'> <br>");
+              $("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span></p>");
               if(totalH > 500 ){
               	current ++ ;
               	totalH -= 500 ;
@@ -180,6 +179,7 @@ yepnope({
 
               }
               current = pgNu ;
+              console.log(current);
             }
           },
           error: function(error) {
@@ -224,7 +224,7 @@ yepnope({
         			return current ;
         		}
         		story.save("pageNum",current);
-        		$("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
+        		$("#p"+current).append("<p><span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span></p>");
 
         		if ($("#fileInput")[0].files.length > 0) {
 		         var file = $("#fileInput")[0].files[0];
