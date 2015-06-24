@@ -155,6 +155,7 @@ yepnope({
         var img;
       //  query.exists("img");
         
+        query.ascending("createdAt");
         query.find({
           success: function(results) {
             resultL = results.length ;
