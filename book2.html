@@ -227,20 +227,20 @@ yepnope({
         		story.save("pageNum",current);
         		$("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
 
-        		if ($("#fileInput")[0].files.length > 0) {
-		         var file = $("#fileInput")[0].files[0];
-		         var name = "photo";
-		         var parseImg = new Parse.File(name, file);
-		         story.save("img",parseImg);
-		         parseImg.save({
-		         success : function (savedImg){
-		         alert(savedImg.url());
-		         },
-		         error : function (saveingImg , errorObject){
-		         alert(errorObject.message) ;
-		         }
-		         });
-		        }
+        		// if ($("#fileInput")[0].files.length > 0) {
+		        //  var file = $("#fileInput")[0].files[0];
+		        //  var name = "photo";
+		        //  var parseImg = new Parse.File(name, file);
+		        //  story.save("img",parseImg);
+		        //  parseImg.save({
+		        //  success : function (savedImg){
+		        //  alert(savedImg.url());
+		        //  },
+		        //  error : function (saveingImg , errorObject){
+		        //  alert(errorObject.message) ;
+		        //  }
+		        //  });
+		        // }
         		$("#words").val('');
         		alert("您剛剛的接龍已經發佈啦！");
 
