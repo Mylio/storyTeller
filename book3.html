@@ -51,7 +51,8 @@
 				  1. 選擇喜歡的顏色: <input type="color" id="textcolor" name="favcolor"><br>
 				  2. 繼續接下去吧！ <br><textarea rows="7" cols="50" id="words"></textarea><br><br>				
             		<!-- <input type="file" id="fileInput"> -->
-				  <button type="submit" class="btn btn-info btn-circle" style="bottom:10px;position:absolute;right:40%;">送出！</button>
+				  <button type="submit" class="btn btn-info btn-circle" style="bottom:10px;position:absolute;right:50%;">送出！</button>
+				  <button id="endBook" type="button" class="btn btn-info btn-circle" style="bottom:10px;position:absolute;right:40%;">結束！</button>
 
 				</form>
 
@@ -145,6 +146,7 @@ yepnope({
 	 var current = 1 ;
 	 var totalH ;
 	 var resultL ;
+	 var end = false;
 	$(document).ready(function(e){
 		//e.preventDefault();
         var data = Parse.Object.extend("Story3");//extend("資料表名稱")
@@ -166,13 +168,25 @@ yepnope({
               color =  object.get('textColor');
               pgNu = object.get('pageNum');
               img = object.get('img');
-
+              end = object.get('end');/***/
               
               console.log(current);
               hei= object.get('textHei');
               totalH += hei ;
               console.log("totalH"+totalH);
-              $("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span></p>");
+              
+              if(end==true){/***/
+              	console.log("can't edit!");
+              	$("#test").css("display","none");
+              	$(".content").css("height","800px");
+              	$("#start").empty();
+              	$("#start").append("這<br>本<br>書<br>已<br>經<br>完<br>成<br>了<br>！");
+              	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
+              	$("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
+
+              }else{
+              	$("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span></p>");
+              }
               if(totalH > 500 ){
               	current ++ ;
               	totalH -= 500 ;
@@ -197,9 +211,23 @@ yepnope({
 		        }, 700);
 			});
 
-			$(document).on('click','#endBook',function(e){
-				if(confirm("r y sure ?")){
-					console.log("end this book");
+			$(document).on('click','#endBook',function(e){/***/
+				if(confirm("一旦按下結束，這本書將不再開放編輯，並且會移至書櫃中，確定讓這本書在這裡結束 ?")){		
+					var Story = Parse.Object.extend("Story3"); //新增表單的的意思
+           			var story = new Story();
+					end = true ;
+					story.save("end",end);
+					story.save("pageNum",current);
+					$("#p"+current).append("<p><span "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
+					$("#start").empty();
+	              	$("#start").append("這<br>本<br>書<br>已<br>經<br>完<br>成<br>了<br>！");
+	              	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
+					$('html,body').animate({
+		            scrollTop: 0
+		        	}, 700);
+					console.log("end this book"+end);
+					console.log("end this book"+current);
+
 				}else{
 					console.log("not end");
 				}
@@ -225,6 +253,7 @@ yepnope({
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
         		story.save("textHei", 21 * Math.ceil($('#words').length / 418) );
+        		
         	//	console.log(current);
 
         		if($("#p"+current).height() > 500 ){
