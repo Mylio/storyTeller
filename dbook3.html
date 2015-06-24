@@ -5,17 +5,24 @@
 <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-<title>小王子_StoryTeller</title>
+<title>小紅帽_StoryTeller</title>
+<meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
 <meta name="viewport" content="width = 1050, user-scalable = no" />
 <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/key.js"></script>
 <style>
-	.icon {
+	.flipbook-viewport{
+		overflow: hidden;
+	}
+　　.icon {
     width: 0px;
-    height: 170px;
-    background: black;
+    height: 180px;
+    background: white;
     
     transition: width 0.7s;
     -webkit-transition: width 0.7s; /* Safari 3.1 to 6.0 */
@@ -24,40 +31,60 @@
     .icon:hover {
         width: 170px;
     }
+    .btn-circle {
+	  width: 60px;
+	  height: 60px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 14px;
+	  line-height: 1.42;
+	  border-radius: 30px;
+	  background-color: rgb(129, 190 , 220);
+	}
 </style>
 </head>
 <body>
+<div class="content" height="1400">
+
 
 <div class="flipbook-viewport">
 	<div class="container">
 		<div class="flipbook">
 			<div style="background-image:url(img/book3.png);background-size:100%;"></div>
-			<div id="story" style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%" id="test"><h1>Hello</h1>
-			<form id="yrWord" style="z-index:200;">
-			  Write down your words: <input type="text" id="words" name="usrname" onkeypress="if (window.event.keyCode==13) return false;"><br>
-			  Select your text color: <input type="color" id="textcolor" name="favcolor"><br>
-			  <input type="submit" value="Submit">
-			</form>
+			<div style="background-image:url(img/paper.png);background-size:100%;"><div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p1"></span></div>
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p2"></span>
 			</div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"><span id="appendText"></span></div>
-			<div id="story2" style="background-image:url(img/paper.png);background-size:100%;"></div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p3"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p4"></span>
+			</div>
+
+			<div style="background-image:url(img/paper.png);background-size:100%;">
+				<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div><span id="p5"></span>
+			</div>
+
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
-			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
+
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 
 		</div>
+
+
+		</div>
 	</div>
-</div>
-<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.5;">
-  <div style="position:fixed;bottom:-10px;left:-20px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png"/></a></div></div><span style="color:white;position:fixed;bottom:20px;left:5px;">Back to Bookshelf</span>
+</div><!--/flip book-->
+		<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.8;">
+		  <div style="position:fixed;bottom:-20px;left:-30px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png" width="170px" height="170px" /></a></div></div>
 
 
 
@@ -102,9 +129,106 @@ yepnope({
 });
 
 </script>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript" charset="utf-8">
+	 var current = 1 ;
+	 var totalH ;
+	 var resultL ;
+	 var end = false;
+	$(document).ready(function(e){
+		//e.preventDefault();
+        var data = Parse.Object.extend("Story3");//extend("資料表名稱")
+        var query = new Parse.Query(data);
+        var text ;
+        var color ;
+        var pgNu ;
+        var img;
+      //  query.exists("img");
+        
+        query.ascending("createdAt");
+        query.find({
+          success: function(results) {
+            resultL = results.length ;
+
+            for (var i = 0; i < results.length; i++) { 
+              var object = results[i];
+              text = object.get('text');
+              color =  object.get('textColor');
+              pgNu = object.get('pageNum');
+              img = object.get('img');
+              end = object.get('end');/***/
+              
+              console.log(current);
+              hei= object.get('textHei');
+              totalH += hei ;
+              console.log("totalH"+totalH);
+              
+              if(end==true){/***/
+              	console.log("can't edit!");
+              	$("#test").css("display","none");
+              	$(".content").css("height","800px");
+              	$("#start").empty();
+              	$("#start").append("這<br>本<br>書<br>已<br>經<br>完<br>成<br>了<br>！");
+              	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
+              	$("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
+
+              }else{
+              	$("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span></p>");
+              }
+              if(totalH > 500 ){
+              	current ++ ;
+              	totalH -= 500 ;
+              	console.log(" totalH "+totalH+" cur"+current);
+
+              }
+              current = pgNu ;
+              console.log(current);
+            }
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+        /*end query*/
+    });
+
+			$(document).on('click','#start',function(e){
+				//window.scrollTo($(""));
+				$('html,body').animate({
+		            scrollTop: $("#test").offset().top - 50
+		        }, 700);
+			});
+
+			$(document).on('click','#endBook',function(e){/***/
+				if(confirm("一旦按下結束，這本書將不再開放編輯，並且會移至書櫃中，確定讓這本書在這裡結束 ?")){		
+					var Story = Parse.Object.extend("Story3"); //新增表單的的意思
+           			var story = new Story();
+					end = true ;
+					story.save("end",end);
+					story.save("pageNum",current);
+					$("#p"+current).append("<p><span "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
+					$("#start").empty();
+	              	$("#start").append("這<br>本<br>書<br>已<br>經<br>完<br>成<br>了<br>！");
+	              	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
+					$('html,body').animate({
+		            scrollTop: 0
+		        	}, 700);
+					console.log("end this book"+end);
+					console.log("end this book"+current);
+
+				}else{
+					console.log("not end");
+				}
+				
+			});
+
+
+			//var sub = false ;
 			$(document).on('submit','#yrWord',function(e){
 				e.preventDefault();
+			//	sub = true ;
+				if($("#words").val()==''){
+					alert('嘿，你什麼也沒寫！寫點什麼加入我們吧！');
+				}else{
 				var textColor = $("#textcolor").val() ;
 				//alert("hi"+$("#words").val());
 				$("#appendText").append($("#words").val());
@@ -115,42 +239,44 @@ yepnope({
            		var story = new Story();
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
-        		$("#story").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
-        		$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
+        		story.save("textHei", 21 * Math.ceil($('#words').length / 418) );
+        		
+        	//	console.log(current);
+
+        		if($("#p"+current).height() > 500 ){
+        			alert($("#p"+current).height());
+        			console.log($("#p"+current).height());
+        			current ++ ;
+        			console.log(current);
+        			return current ;
+        		}
+        		story.save("pageNum",current);
+        		$("#p"+current).append("<p><span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span></p>");
+
+        		// if ($("#fileInput")[0].files.length > 0) {
+		        //  var file = $("#fileInput")[0].files[0];
+		        //  var name = "photo";
+		        //  var parseImg = new Parse.File(name, file);
+		        //  story.save("img",parseImg);
+		        //  parseImg.save({
+		        //  success : function (savedImg){
+		        //  alert(savedImg.url());
+		        //  },
+		        //  error : function (saveingImg , errorObject){
+		        //  alert(errorObject.message) ;
+		        //  }
+		        //  });
+		        // }
         		$("#words").val('');
-        		alert("done");
+        		alert("您剛剛的接龍已經發佈啦！");
+
+        		
+        		}
+
 
 			});
-</script>
-<script type="text/javascript">
-	$(document).ready(function(e){
-		//e.preventDefault();
-        var data = Parse.Object.extend("Story3");//extend("資料表名稱")
-        var query = new Parse.Query(data);
-        var text ;
-        var color ;
-        query.find({
-          success: function(results) {
 
-            for (var i = 0; i < results.length; i++) { 
-              if(i==0){
-              	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
-              	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
-              }
-
-              var object = results[i];
-              text = object.get('text');
-              color =  object.get('textColor');
-              $("#story").append("<span style='color:" +color + ";'>" + text + "</span>");
-              $("#story2").append("<span style='color:" +color + ";'>" + text + "</span>");
-            }
-          },
-          error: function(error) {
-            alert("Error: " + error.code + " " + error.message);
-          }
-        });
-        /*end query*/
-    });
 </script>
+
 </body>
 </html>
