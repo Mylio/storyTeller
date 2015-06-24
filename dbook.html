@@ -5,6 +5,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+<title>小王子_StoryTeller</title>
 <meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
 <meta name="viewport" content="width = 1050, user-scalable = no" />
 <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
@@ -13,8 +14,28 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$(".loader").fadeOut("slow");
+})
+</script>
+
 <script type="text/javascript" src="js/key.js"></script>
 <style>
+	.flipbook-viewport{
+		overflow: hidden;
+	}
+	.loader {
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+	}
 	.icon {
     width: 0px;
     height: 180px;
@@ -40,7 +61,9 @@
 </style>
 </head>
 <body>
-<div class="content">
+<div class="loader"></div>
+
+<div class="content" height="1400">
 
 <div class="flipbook-viewport">
 	<div class="container">
@@ -76,13 +99,16 @@
 			<div style="background-image:url(img/paper.png);background-size:100%;"></div>
 
 		</div>
+
+
+		</div>
 	</div>
 </div><!--/flip book-->
+		<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.8;">
+		  <div style="position:fixed;bottom:-20px;left:-30px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png" width="170px" height="170px" /></a></div></div>
+		  <div class="icon" style="position:fixed;bottom:-15px;right:-20px;opacity:0.8;">
+		 <div style="position:fixed;bottom:-20px;right:-30px;"><a href="index.html"><img class="home" src="img/icon_home_clean.png" width="170px" height="170px"/></a></div></div>
 
-
-<div class="icon" style="position:fixed;bottom:-10px;left:-20px;opacity:0.8;">
-  <div style="position:fixed;bottom:-20px;left:-30px;"><a href="bookShelf.html"><img class="bookshelf" src="img/icon_bookshelf_clean.png" width="170px" height="170px" /></a></div></div>
-</div>
 
 <script type="text/javascript">
 
@@ -126,45 +152,77 @@ yepnope({
 
 </script>
 <script type="text/javascript" language="javascript" charset="utf-8">
-	 var current ;
+	 var current = 1 ;
 	 var totalH ;
 	 var resultL ;
 	$(document).ready(function(e){
 		//e.preventDefault();
         var data = Parse.Object.extend("testStory");//extend("資料表名稱")
         var query = new Parse.Query(data);
+
+
         var text ;
         var color ;
         var pgNu ;
+        var img;
         
-        current = 1 ;
+        
+        query.ascending("createdAt");
         query.find({
           success: function(results) {
+          	console.log(results);
             resultL = results.length ;
             console.log(resultL) ;
 
             for (var i = 0; i < results.length; i++) { 
               if(i==0){
+
             //  	$("#story").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
            //   	$("#story2").append("<div style='padding:20px;'></div><div style='float:right;padding:10px;height:100%'></div><div style='float:left;padding:10px;height:100%'></div>");
               }
+
+              
 
               var object = results[i];
               text = object.get('text');
               color =  object.get('textColor');
               pgNu = object.get('pageNum');
-              current = pgNu ;
+              img = object.get('img');
+              end = object.get('end');/***/
+              
+              
+              console.log(img);
               console.log(current);
               hei= object.get('textHei');
               totalH += hei ;
               console.log("totalH"+totalH);
-              $("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span><br>");
+              if(end==true){/***/
+              	console.log("can't edit!");
+              	$("#test").css("display","none");
+              	$(".content").css("height","800px");
+              	$("#start").empty();
+              	$("#start").append("這<br>本<br>書<br>已<br>經<br>完<br>成<br>了<br>！");
+              	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
+              	$("#p"+pgNu).append("<p><span id='span"+ (i+1)+"' "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
+
+              }
+              else if (img != null)
+              {
+              	query.exists("img");
+              	$("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span>" + "<img src='" + img.url() + "' width='100px' height='100px'> <br>");
+              }
+              else{
+
+              	$("#p"+pgNu).append("<span id='span"+ (i+1)+"' "+ "style='color:" +color + ";'>" + text + "</span> <br>");
+              }
+              
               if(totalH > 500 ){
               	current ++ ;
               	totalH -= 500 ;
               	console.log(" totalH "+totalH+" cur"+current);
 
               }
+              current = pgNu ;
               // console.log($("#p"+current).height(true)); //0
               // console.log( $('#span'+(i+1)).height(true));//0
               // console.log($('#span'+(i+1)));
@@ -205,13 +263,38 @@ yepnope({
 		// 	}
 		// }
 			$(document).on('click','#start',function(e){
-				$("#test").css("display","block");
+				//window.scrollTo($(""));
+				$('html,body').animate({
+		            scrollTop: $("#test").offset().top - 50
+		        }, 700);
+			});
+			$(document).on('click','#endBook',function(e){/***/
+				if(confirm("一旦按下結束，這本書將不再開放編輯，並且會移至書櫃中，確定讓這本書在這裡結束 ?")){		
+					var Story = Parse.Object.extend("testStory"); //新增表單的的意思
+           			var story = new Story();
+					end = true ;
+					story.save("end",end);
+					story.save("pageNum",current);
+					$("#p"+current).append("<p><span "+ "style='color:" +"#2C88B0" + ";'>" + "========END========" + "</span></p>");
+					$("#start").empty();
+	              	$("#start").append("這<br>本<br>書<br>已<br>經<br>完<br>成<br>了<br>！");
+	              	$("#start").css({"height":"300px","position":"fixed","right":"30px","bottom":"0px","z-index":"100"});
+					$('html,body').animate({
+		            scrollTop: 0
+		        	}, 700);
+					console.log("end this book"+end);
+					console.log("end this book"+current);
+
+				}else{
+					console.log("not end");
+				}
+				
 			});
 
 			//var sub = false ;
 			$(document).on('submit','#yrWord',function(e){
 				e.preventDefault();
-				sub = true ;
+			//	sub = true ;
 				if($("#words").val()==''){
 					alert('嘿，你什麼也沒寫！寫點什麼加入我們吧！');
 				}else{
@@ -226,7 +309,7 @@ yepnope({
 				story.save("text", $('#words').val());
         		story.save("textColor",$('#textcolor').val());
         		story.save("textHei", 21 * Math.ceil($('#words').length / 418) );
-        		console.log(current);
+        	//	console.log(current);
 
         		if($("#p"+current).height() > 500 ){
         			alert($("#p"+current).height());
@@ -237,11 +320,32 @@ yepnope({
         		}
         		story.save("pageNum",current);
         		$("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
+
+        		if ($("#fileInput")[0].files.length > 0) {
+		         var file = $("#fileInput")[0].files[0];
+		         var name = "photo";
+		         var parseImg = new Parse.File(name, file);
+		         $("#p"+parseImg).append("<img src='" + parseIng.url() + "' width='100px' height='100px'> <br>");
+		         story.save("img",parseImg);
+		         parseImg.save({
+		         success : function (savedImg){
+		         alert(savedImg.url());
+		         },
+		         error : function (saveingImg , errorObject){
+		         alert(errorObject.message) ;
+		         }
+		         });
+		         
+		        // $("#p"+current).append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span><br>");
+		        }
+
+		        
+
         	//	$("#story2").append("<span style='color:" +$('#textcolor').val() + ";'>" + $('#words').val() + "</span>");
         		$("#words").val('');
         		alert("您剛剛的接龍已經發佈啦！");
-        		console.log($("#p"+current).height());//height判斷的是螢幕上有的，得另外存值，要不然會跑0。
-        		console.log(current);
+        	//	console.log($("#p"+current).height());//height判斷的是螢幕上有的，得另外存值，要不然會跑0。
+        	//	console.log(current);
         		
         		}
 
